@@ -1,14 +1,13 @@
-import React from 'react';
-import Heading from '../ui/heading'; 
+import Container from './Container';
+import Heading from '../ui/heading';
 import Paragraph from '../ui/paragraph';
 
 const Footer = () => {
   return (
-    <footer className="bg-white pt-16 pb-8 px-8 border-t border-gray-100">
-      <div className="max-w-7xl mx-auto">
-        
+    <footer className="border-t border-gray-100 bg-white pt-16 pb-8">
+      <Container>
         {/* Top Section: Grid with 4 Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-16">
+        <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4 lg:grid-cols-5">
           
           {/* Column 1: Logo */}
           <div className="lg:col-span-1">
@@ -89,8 +88,7 @@ const Footer = () => {
             {/* Social Icons Placeholder */}
           </div>
         </div>
-
-      </div>
+      </Container>
     </footer>
   );
 };

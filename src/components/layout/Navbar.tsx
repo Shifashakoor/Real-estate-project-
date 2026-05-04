@@ -1,34 +1,45 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Container from './Container';
 import Heading from '../ui/heading';
 import Paragraph from '../ui/paragraph';
+
 const Navbar = () => {
   return (
-    <nav className="w-full h-[96px] bg-white/40 backdrop-blur-md border-b border-gray-100 flex items-center justify-between px-8 fixed top-0 z-50">
-      
-      {/* Logo: Yahan hum Heading ko REUSE kar rahe hain */}
-      <Heading level="h3" className="cursor-pointer">
-        Estatery
-      </Heading>
+    <nav className="fixed top-0 z-50 w-full border-b border-gray-100 bg-white/40 backdrop-blur-md">
+      <Container className="flex h-[96px] items-center justify-between">
+        <Link to="/" className="no-underline text-inherit">
+          <Heading level="h3" className="cursor-pointer">
+            Estatery
+          </Heading>
+        </Link>
 
-      {/* Menu Links: Yahan Paragraph ko REUSE kar rahe hain */}
-      <div className="hidden md:flex gap-8">
-        <Paragraph size="md" className="font-medium hover:text-indigo-600 cursor-pointer">
-          Rent
-        </Paragraph>
-        <Paragraph size="md" className="font-medium hover:text-indigo-600 cursor-pointer">
-          Buy
-        </Paragraph>
-        <Paragraph size="md" className="font-medium hover:text-indigo-600 cursor-pointer">
-          Sell
-        </Paragraph>
-      </div>
+        <div className="hidden gap-8 md:flex">
+          <Link to="/rent" className="no-underline text-inherit">
+            <Paragraph size="md" className="cursor-pointer font-medium hover:text-indigo-600">
+              Rent
+            </Paragraph>
+          </Link>
+          <Link to="/buy" className="no-underline text-inherit">
+            <Paragraph size="md" className="cursor-pointer font-medium hover:text-indigo-600">
+              Buy
+            </Paragraph>
+          </Link>
+          <Link to="/sell" className="no-underline text-inherit">
+            <Paragraph size="md" className="cursor-pointer font-medium hover:text-indigo-600">
+              Sell
+            </Paragraph>
+          </Link>
+        </div>
 
-      {/* Buttons */}
-      <div className="flex gap-4">
-        <button className="px-4 py-2 font-semibold">Login</button>
-        <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg">Sign up</button>
-      </div>
-      
+        <div className="flex gap-4">
+          <button type="button" className="px-4 py-2 font-semibold">
+            Login
+          </button>
+          <button type="button" className="rounded-lg bg-indigo-600 px-4 py-2 text-white">
+            Sign up
+          </button>
+        </div>
+      </Container>
     </nav>
   );
 };

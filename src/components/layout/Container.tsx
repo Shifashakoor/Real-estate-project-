@@ -1,24 +1,21 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 
-interface ContainerProps {
-  children: React.ReactNode;
-  className?: string; // Taake hum extra classes bhi add kar saken
+export interface ContainerProps {
+  children: ReactNode;
+  /** Extra classes on the inner wrapper (max-width box) */
+  className?: string;
 }
 
+/**
+ * Centered content column, max width 1440px, responsive horizontal padding.
+ * Typical pattern: wrap inside `<section>` for each page block.
+ */
 const Container = ({ children, className }: ContainerProps) => {
+  const base =
+    'mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16';
+
   return (
-    <div 
-      className={`
-        max-w-[1440px] 
-        mx-auto 
-        px-4 
-        sm:px-8 
-        md:px-12 
-        lg:px-16 
-        w-full 
-        ${className || ''}
-      `}
-    >
+    <div className={[base, className].filter(Boolean).join(' ')}>
       {children}
     </div>
   );
