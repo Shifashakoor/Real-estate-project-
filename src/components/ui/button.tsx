@@ -1,6 +1,43 @@
 import { useState } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
-const SlidingButton = () => {
+export type ButtonVariant = 'primary' | 'secondary' | 'outline';
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  variant?: ButtonVariant;
+}
+
+const variantClasses: Record<ButtonVariant, string> = {
+  primary:
+    'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md shadow-indigo-600/25',
+  secondary: 'bg-slate-900 text-white hover:bg-slate-800',
+  outline:
+    'border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 bg-transparent',
+};
+
+export default function Button({
+  children,
+  variant = 'primary',
+  className = '',
+  type = 'button',
+  ...rest
+}: ButtonProps) {
+  const base =
+    'inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:pointer-events-none disabled:opacity-50';
+
+  return (
+    <button
+      type={type}
+      className={`${base} ${variantClasses[variant]} ${className}`.trim()}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+}
+
+export function SlidingButton() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -14,54 +51,58 @@ const SlidingButton = () => {
           }
           .animate-bg-flow {
             background-size: 200% 200%;
-            /* Background gradient ki speed mazeed slow (8s) */
             animation: moveGradient 8s ease infinite;
           }
         `}
       </style>
 
-      <button 
+      <button
+        type="button"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className="
-          relative w-72 h-16 rounded-xl overflow-hidden shadow-2xl
-          bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600
-          animate-bg-flow active:scale-95 transition-all duration-700
+          relative h-16 w-72 overflow-hidden rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600
+          shadow-2xl animate-bg-flow transition-all duration-700 active:scale-95
         "
       >
-        {/* Layer 1: Bottom Text (Gradient State) */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-white font-bold tracking-[2px] uppercase text-sm">
+          <span className="text-sm font-bold uppercase tracking-[2px] text-white">
             Request a Demo
           </span>
         </div>
 
-        {/* Layer 2: White Slide (Jo ab boht slow move karegi) */}
-        <div 
+        <div
           className={`
-            absolute inset-0 bg-white z-20 flex items-center justify-center
-            /* Duration ko 1500ms kar diya hai mazeed slow karne ke liye */
+            absolute inset-0 z-20 flex items-center justify-center bg-white
             transition-transform duration-[1500ms] ease-[cubic-bezier(0.2,1,0.2,1)]
             ${isHovered ? 'translate-x-0' : 'translate-x-full'}
           `}
         >
-          <span className="text-slate-900 font-bold tracking-[2px] uppercase text-sm">
+          <span className="text-sm font-bold uppercase tracking-[2px] text-slate-900">
             Request a Demo
           </span>
-          
+
           <div className="absolute right-6">
-            <svg className="w-5 h-5 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            <svg
+              className="h-5 w-5 text-slate-900"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2.5"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
             </svg>
           </div>
         </div>
       </button>
 
-      <p className="text-slate-400 text-[10px] font-bold tracking-[3px] uppercase opacity-50">
+      <p className="text-[10px] font-bold uppercase tracking-[3px] text-slate-400 opacity-50">
         Super Smooth Transition
       </p>
     </div>
   );
-};
-
-export default SlidingButton;
+}

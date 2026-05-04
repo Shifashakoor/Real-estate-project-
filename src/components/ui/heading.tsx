@@ -1,7 +1,7 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 
 interface HeadingProps {
-  children: React.ReactNode;
+  children: ReactNode;
   level?: 'h1' | 'h2' | 'h3' | 'h4'; 
   className?: string;
 }
