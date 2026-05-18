@@ -4,7 +4,7 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 export type ButtonVariant = 'primary' | 'secondary' | 'outline';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
+  text: string;
   variant?: ButtonVariant;
 }
 
@@ -17,7 +17,7 @@ const variantClasses: Record<ButtonVariant, string> = {
 };
 
 export default function Button({
-  children,
+  text ,
   variant = 'primary',
   className = '',
   type = 'button',
@@ -32,7 +32,7 @@ export default function Button({
       className={`${base} ${variantClasses[variant]} ${className}`.trim()}
       {...rest}
     >
-      {children}
+      {text}
     </button>
   );
 }

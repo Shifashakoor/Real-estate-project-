@@ -1,11 +1,10 @@
-import type { ReactNode } from 'react';
 
 interface ParagraphProps {
-  children: ReactNode;
+  text: String;
   className?: string; 
   size?: 'sm' | 'md' | 'lg'; 
 }
-const Paragraph = ({ children, className = '', size = 'md' }: ParagraphProps) => {
+const Paragraph = ({ text, className = "" , size = 'md' , }: ParagraphProps) => {
   const sizes = {
     sm: 'text-sm',      
     md: 'text-base',    
@@ -13,7 +12,7 @@ const Paragraph = ({ children, className = '', size = 'md' }: ParagraphProps) =>
   };
   return (
     <p className={`${sizes[size]} text-[#4D5461] leading-relaxed ${className}`}>
-      {children}
+      {text} 
     </p>
   );
 };

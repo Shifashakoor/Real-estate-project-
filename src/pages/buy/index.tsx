@@ -1,9 +1,17 @@
-const Buy = () => {
+import BuyHeroSection from '../../sections/buySection/heroSection'; 
+import PropertyGridSection from '../../sections/buySection/propertySection';
+import TestimonialsSection from '../../sections/buySection/testimationSection';
+import BuyCTASection from '../../sections/buySection/ctaSection';
+
+const BuyPage = () => {
   return (
-    <div>
-      <h1>Buy</h1>
+    <div className="w-full min-h-screen bg-white">
+      <BuyHeroSection />
+      <PropertyGridSection />
+      <TestimonialsSection />
+      <BuyCTASection />
     </div>
   );
 };
 
-export default Buy;
+export default BuyPage;

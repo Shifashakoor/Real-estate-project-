@@ -1,23 +1,24 @@
 import type { ReactNode } from 'react';
 
 interface HeadingProps {
-  children: ReactNode;
-  level?: 'h1' | 'h2' | 'h3' | 'h4'; 
+  text: string;
+  level?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'; 
   className?: string;
 }
-
-const Heading = ({ children, level = 'h1', className = '' }: HeadingProps) => {
+const Heading = ({ text, level = 'h1', className = '' }: HeadingProps) => {
   const Tag = level;
   const sizes = {
     h1: 'text-4xl md:text-5xl font-bold',
     h2: 'text-3xl md:text-4xl font-semibold',
     h3: 'text-2xl md:text-3xl font-semibold',
     h4: 'text-xl md:text-2xl font-medium',
+    h5: 'text-lg md:text-xl font-medium',
+    h6: 'text-base md:text-lg font-medium',
   };
 
   return (
     <Tag className={`${sizes[level]} text-[#000929] ${className}`}>
-      {children}
+      {text}
     </Tag>
   );
 };

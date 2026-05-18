@@ -1,91 +1,99 @@
+import { Link } from 'react-router-dom';
 import Container from './Container';
 import Heading from '../ui/heading';
 import Paragraph from '../ui/paragraph';
 
 const Footer = () => {
   return (
-    <footer className="border-t border-gray-100 bg-white pt-16 pb-8">
+    <footer className="border-t border-gray-100 bg-white pt-16 pb-8 font-['Plus_Jakarta_Sans',sans-serif]">
       <Container>
-        {/* Top Section: Grid with 4 Columns */}
-        <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-4 lg:grid-cols-5">
+        {/* Main Grid Section */}
+        <div className="mb-12 grid grid-cols-1 md:grid-cols-4 gap-12">
           
-          {/* Column 1: Logo */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 bg-indigo-600 rounded-md flex items-center justify-center text-white font-bold">E</div>
-              <Heading level="h4" className="text-xl">Estatery</Heading>
-            </div>
+          {/* Column 1: Logo & Intro */}
+          <div className="space-y-4">
+            <Link to="/">
+              <img 
+                src="/home/heroSection/Left Nav.png" 
+                alt="Estatery Logo" 
+                className="w-32 h-auto object-contain cursor-pointer" 
+              /> 
+            </Link>
+            <Paragraph 
+              text="The most trusted platform for buying, selling, and renting properties." 
+              className="text-gray-400 text-xs leading-relaxed max-w-[200px]" 
+            />
           </div>
 
-          {/* Column 2: SELL A HOME & BUY A HOME */}
+          {/* Column 2: Pages - Rent Removed */}
           <div>
-            <div className="mb-10">
-              <Heading level="h4" className="text-sm font-bold uppercase mb-4 text-gray-900">Sell a Home</Heading>
-              <ul className="space-y-3">
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Request an offer</Paragraph></li>
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Pricing</Paragraph></li>
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Reviews</Paragraph></li>
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Stories</Paragraph></li>
-              </ul>
-            </div>
-            <div>
-              <Heading level="h4" className="text-sm font-bold uppercase mb-4 text-gray-900">Buy a Home</Heading>
-              <ul className="space-y-3">
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Buy</Paragraph></li>
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Finance</Paragraph></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Column 3: BUY, RENT AND SELL & TERMS */}
-          <div>
-            <div className="mb-10">
-              <Heading level="h4" className="text-sm font-bold uppercase mb-4 text-gray-900">Buy, Rent and Sell</Heading>
-              <ul className="space-y-3">
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Buy and sell properties</Paragraph></li>
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Rent home</Paragraph></li>
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Builder trade-up</Paragraph></li>
-              </ul>
-            </div>
-            <div>
-              <Heading level="h4" className="text-sm font-bold uppercase mb-4 text-gray-900">Terms & Privacy</Heading>
-              <ul className="space-y-3">
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Trust & Safety</Paragraph></li>
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Terms of Service</Paragraph></li>
-                <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Privacy Policy</Paragraph></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Column 4: ABOUT */}
-          <div>
-            <Heading level="h4" className="text-sm font-bold uppercase mb-4 text-gray-900">About</Heading>
-            <ul className="space-y-3">
-              <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Company</Paragraph></li>
-              <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">How it works</Paragraph></li>
-              <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Contact</Paragraph></li>
-              <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Investors</Paragraph></li>
+            <Heading 
+              text="Pages" 
+              level="h4" 
+              className="text-sm font-[800] uppercase mb-6 text-[#101828] tracking-widest" 
+            />
+            <ul className="space-y-3 list-none p-0">
+              <li><Link to="/" className="no-underline"><Paragraph text="Home" size="sm" className="text-gray-500 hover:text-[#7065F0] transition-colors" /></Link></li>
+              <li><Link to="/buy" className="no-underline"><Paragraph text="Buy" size="sm" className="text-gray-500 hover:text-[#7065F0] transition-colors" /></Link></li>
+              <li><Link to="/sell" className="no-underline"><Paragraph text="Sell" size="sm" className="text-gray-500 hover:text-[#7065F0] transition-colors" /></Link></li>
+              <li><Link to="/about" className="no-underline"><Paragraph text="About Us" size="sm" className="text-gray-500 hover:text-[#7065F0] transition-colors" /></Link></li>
             </ul>
           </div>
 
-          {/* Column 5: RESOURCES */}
+          {/* Column 3: Services */}
           <div>
-            <Heading level="h4" className="text-sm font-bold uppercase mb-4 text-gray-900">Resources</Heading>
-            <ul className="space-y-3">
-              <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Blog</Paragraph></li>
-              <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Guides</Paragraph></li>
-              <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">FAQ</Paragraph></li>
-              <li><Paragraph size="sm" className="text-gray-500 cursor-pointer">Help Center</Paragraph></li>
+            <Heading 
+              text="Services" 
+              level="h4" 
+              className="text-sm font-[800] uppercase mb-6 text-[#101828] tracking-widest" 
+            />
+            <ul className="space-y-3 list-none p-0">
+              <li><Paragraph text="Request offer" size="sm" className="text-gray-500 hover:text-[#7065F0] cursor-pointer transition-colors" /></li>
+              <li><Paragraph text="Pricing" size="sm" className="text-gray-500 hover:text-[#7065F0] cursor-pointer transition-colors" /></li>
+              <li><Paragraph text="Reviews" size="sm" className="text-gray-500 hover:text-[#7065F0] cursor-pointer transition-colors" /></li>
             </ul>
           </div>
 
+          {/* Column 4: Get In Touch */}
+          <div className="space-y-4">
+            <Heading 
+              text="Get In Touch" 
+              level="h4" 
+              className="text-sm font-[800] uppercase mb-6 text-[#101828] tracking-widest" 
+            />
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <span className="text-[#7065F0] text-sm">📍</span>
+                <Paragraph text="Surrey, BC V3S 1R2" className="text-gray-500 text-xs leading-snug" />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-[#7065F0] text-sm">📞</span>
+                <a href="tel:5048971243" className="no-underline">
+                  <Paragraph text="504-897-1243" className="text-gray-500 text-xs font-bold hover:text-[#7065F0]" />
+                </a>
+              </div>
+
+              <div className="pt-2">
+                <Link to="/contact" className="no-underline">
+                  <button className="text-[#7065F0] text-xs font-bold border border-[#7065F0] px-4 py-2 rounded-lg hover:bg-[#7065F0] hover:text-white transition-all capitalize">
+                    contact us 
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Bottom Section: Copyright */}
+        {/* Bottom Section */}
         <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
-          <Paragraph size="sm" className="text-gray-400">©2021 Estatery. All rights reserved</Paragraph>
+          <Paragraph 
+            text="©2026 Estatery. All rights reserved" 
+            className="text-gray-400 text-[10px] uppercase font-bold tracking-wider" 
+          />
           <div className="flex gap-6">
-            {/* Social Icons Placeholder */}
+            <Link to="/privacy" className="no-underline"><Paragraph text="Privacy Policy" className="text-gray-400 text-[10px] uppercase font-bold hover:text-[#101828] cursor-pointer" /></Link>
+            <Link to="/terms" className="no-underline"><Paragraph text="Terms" className="text-gray-400 text-[10px] uppercase font-bold hover:text-[#101828] cursor-pointer" /></Link>
           </div>
         </div>
       </Container>
