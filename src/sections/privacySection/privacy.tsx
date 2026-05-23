@@ -212,12 +212,7 @@ const Privacy = () => {
       </Container>
 
       {/* Action Button */}
-      <Container className="pt-4 bg-transparent p-0 border-0 shadow-none">
-        <button className="bg-[#00a86b] text-white font-medium text-sm px-6 py-3 rounded-lg hover:bg-[#008f5d] transition-all shadow-sm">
-          Email Technical Support
-        </button>
-      </Container>
-
+      
       {/* Dynamic Pop-up Modal System */}
       {activeCard && (
         <Container className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 border-0 rounded-none shadow-none">

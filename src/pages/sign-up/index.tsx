@@ -1,4 +1,4 @@
-import React from 'react';
+
 import SignupSection from '../../sections/signupSection/signup';
 
 const SignupPage = () => {

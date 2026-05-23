@@ -4,10 +4,11 @@ import Heading from '../ui/heading';
 import Paragraph from '../ui/paragraph';
 
 const Footer = () => {
+  const headingStyle = "text-xs font-[900] uppercase mb-6 text-[#101828] tracking-widest";
+
   return (
     <footer className="border-t border-gray-100 bg-white pt-16 pb-8 font-['Plus_Jakarta_Sans',sans-serif]">
       <Container>
-        {/* Main Grid Section */}
         <div className="mb-12 grid grid-cols-1 md:grid-cols-4 gap-12">
           
           {/* Column 1: Logo & Intro */}
@@ -25,13 +26,9 @@ const Footer = () => {
             />
           </div>
 
-          {/* Column 2: Pages - Rent Removed */}
+          {/* Column 2: Pages */}
           <div>
-            <Heading 
-              text="Pages" 
-              level="h4" 
-              className="text-sm font-[800] uppercase mb-6 text-[#101828] tracking-widest" 
-            />
+            <Heading text="Pages" level="h4" className={headingStyle} />
             <ul className="space-y-3 list-none p-0">
               <li><Link to="/" className="no-underline"><Paragraph text="Home" size="sm" className="text-gray-500 hover:text-[#7065F0] transition-colors" /></Link></li>
               <li><Link to="/buy" className="no-underline"><Paragraph text="Buy" size="sm" className="text-gray-500 hover:text-[#7065F0] transition-colors" /></Link></li>
@@ -40,40 +37,31 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 3: Services */}
+          {/* Column 3: Policies */}
           <div>
-            <Heading 
-              text="Services" 
-              level="h4" 
-              className="text-sm font-[800] uppercase mb-6 text-[#101828] tracking-widest" 
-            />
+            <Heading text="Policies" level="h4" className={headingStyle} />
             <ul className="space-y-3 list-none p-0">
-              <li><Paragraph text="Request offer" size="sm" className="text-gray-500 hover:text-[#7065F0] cursor-pointer transition-colors" /></li>
-              <li><Paragraph text="Pricing" size="sm" className="text-gray-500 hover:text-[#7065F0] cursor-pointer transition-colors" /></li>
-              <li><Paragraph text="Reviews" size="sm" className="text-gray-500 hover:text-[#7065F0] cursor-pointer transition-colors" /></li>
+              <li><Link to="/privacy" className="no-underline"><Paragraph text="Privacy Policy" size="sm" className="text-gray-500 hover:text-[#7065F0] transition-colors" /></Link></li>
+              <li><Link to="/terms" className="no-underline"><Paragraph text="Terms & Condition" size="sm" className="text-gray-500 hover:text-[#7065F0] transition-colors" /></Link></li>
+              <li><Link to="/faq" className="no-underline"><Paragraph text="FAQs" size="sm" className="text-gray-500 hover:text-[#7065F0] transition-colors" /></Link></li>
             </ul>
           </div>
 
           {/* Column 4: Get In Touch */}
           <div className="space-y-4">
-            <Heading 
-              text="Get In Touch" 
-              level="h4" 
-              className="text-sm font-[800] uppercase mb-6 text-[#101828] tracking-widest" 
-            />
+            <Heading text="Get In Touch" level="h4" className={headingStyle} />
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <span className="text-[#7065F0] text-sm">📍</span>
                 <Paragraph text="Surrey, BC V3S 1R2" className="text-gray-500 text-xs leading-snug" />
               </div>
-
               <div className="flex items-center gap-3">
                 <span className="text-[#7065F0] text-sm">📞</span>
                 <a href="tel:5048971243" className="no-underline">
                   <Paragraph text="504-897-1243" className="text-gray-500 text-xs font-bold hover:text-[#7065F0]" />
                 </a>
               </div>
-
+              {/* Contact Us Button Added Back */}
               <div className="pt-2">
                 <Link to="/contact" className="no-underline">
                   <button className="text-[#7065F0] text-xs font-bold border border-[#7065F0] px-4 py-2 rounded-lg hover:bg-[#7065F0] hover:text-white transition-all capitalize">

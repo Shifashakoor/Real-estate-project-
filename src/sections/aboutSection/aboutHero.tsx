@@ -4,13 +4,13 @@ import Paragraph from '../../components/ui/paragraph';
 
 const AboutHero = () => {
   return (
-    <section className="pt-32 pb-20 bg-white">
+    <section className="pt-10 pb-20 bg-white">
       <Container>
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="flex-1">
             <Heading 
               text="SPEEDWAY HOMES: EVOLVING SPACES. ENDURING VALUES." 
-              level="h1" 
+              level="h2" 
               className="text-sm md:text-5xl font-extrabold text-[#101828] mb-6 leading-tight" 
             />
             <Paragraph 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -51,6 +51,7 @@ const contactSchema = z.object({
   message: z.string().min(20, "Min 20 chars"),
 });
 
+
 const ContactPage = () => {
   
   const [loading, setLoading] = useState(false);
@@ -64,7 +65,6 @@ const ContactPage = () => {
     setLoading(true);
     setStatus('');
 
-
     const templateParams = {
       name: data.fullName,
       email: data.email,
@@ -73,15 +73,15 @@ const ContactPage = () => {
     };
 
     emailjs.send(
-      'service_zi9f9gq',       // Aapki Service ID
-      'template_r6029vn',      // Aapki Template ID
+      'service_zi9f9gq',    
+      'template_r6029vn',    
       templateParams,
-      'CqaAGR1IwIf3edgFN'      // Aapki Public Key
+      'CqaAGR1IwIf3edgFN'    
     )
     .then((response) => {
        console.log('SUCCESS!', response.status, response.text);
        setStatus('Success! Your message has been sent.');
-       reset(); // Form clear karne ke liye
+       reset(); 
     })
     .catch((err) => {
        console.error('FAILED...', err);
@@ -93,13 +93,16 @@ const ContactPage = () => {
   };
 
   return (
-    <Section className="pt-32 pb-20 bg-[#F9FAFB]">
+    <Section className="pt-10 pb-20 bg-[#F9FAFB]">
       <Container>
         <Box className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           
-          {/* Left Side: Form */}
-          <Box className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
-            <Heading text="Send us a Message" level="h3" className="text-xl font-bold mb-8 text-[#101828]" />
+          <Box 
+          className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
+            <Heading 
+            text="Send us a Message"
+              level="h3"
+              className="text-xl font-bold mb-8 text-[#101828]" />
             
             <form onSubmit={handleSubmit(onSubmit)}>
               <FormField label="Full Name" name="fullName" register={register} error={errors.fullName} placeholder="Enter your name" />
@@ -107,59 +110,64 @@ const ContactPage = () => {
               <FormField label="Subject" name="subject" register={register} error={errors.subject} placeholder="What is this about?" />
               <FormField label="Message" name="message" register={register} error={errors.message} placeholder="How can we help?" isTextArea />
               
-              <Button 
-                type="submit" 
-                disabled={loading}
-                className="w-full bg-[#02A652] hover:bg-[#028a44] text-white font-bold py-4 rounded-lg mt-4 transition-all disabled:bg-gray-400"
-              >
-                {loading ? 'Sending...' : 'Send Message'}
-              </Button>
+           <Button 
+  type="submit" 
+  disabled={loading}
+  className="w-full bg-[#7065f0] hover:bg-[#5b54d1] text-white font-bold py-4 rounded-lg mt-4 cursor-pointer flex items-center justify-center min-h-[50px]"
+>
+  {loading ? 'Sending...' : 'Send Message'}
+</Button>
             </form>
 
-            {/* Success ya Error Message UI par dikhane ke liye */}
             {status && (
               <p className={`mt-4 text-xs font-semibold text-center ${status.includes('Success') ? 'text-green-600' : 'text-red-500'}`}>
                 {status}
               </p>
             )}
           </Box>
+
           <Box className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
-            <Heading text="Contact/homeowner care" level="h3" className="text-xl font-bold mb-8 text-[#101828]" />
+            <Heading 
+            text="Contact/Homeowner care"
+             level="h3" className="text-xl font-bold mb-8 text-[#101828]" />
             
             <Box className="space-y-8">
-              {/* 1. Location Card */}
               <Box className="flex items-start gap-4">
                 <Box className="w-12 h-12 bg-[#E0F2E9] rounded-full flex items-center justify-center text-[#02A652]">
                   <span className="text-xl">📍</span>
                 </Box>
                 <Box>
                   <Heading text="Location" level="h4" className="font-bold text-[#101828] text-lg" />
-                  <Paragraph text="Surrey, BC" className="text-gray-500 text-sm" />
+                  <Paragraph text="Lahore, Pakistan" className="text-gray-500 text-sm" />
                 </Box>
               </Box>
-
-              {/* 2. Email Card */}
               <Box className="flex items-start gap-4">
-                <Box className="w-12 h-12 bg-[#E0F2E9] rounded-full flex items-center justify-center text-[#02A652]">
-                  <span className="text-xl">✉️</span>
-                </Box>
-                <Box>
-                  <Heading text="Email" level="h4" className="font-bold text-[#101828] text-lg" />
-                  <Button className="mt-2 bg-[#02A652] hover:bg-[#028a44] text-white text-xs font-bold px-5 py-2.5 rounded-lg flex items-center gap-2 transition-colors">
-                    <span>✉️</span> Send Email
-                  </Button>
-                </Box>
-              </Box>
+  <Box className="w-12 h-12 bg-[#E0F2E9] rounded-full flex items-center justify-center text-[#02A652]">
+    <span className="text-xl">✉️</span>
+  </Box>
+  <Container clean className="flex flex-col">
+    <Heading text="Email Address" level="h4" className="font-bold text-[#101828] text-lg" />
+    <Paragraph 
+      text="tecitsolution812@gmail.com" 
+      className="text-gray-500 text-sm mt-1" 
+    />
+  </Container>
+</Box>
 
-              {/* 3. Phone Card */}
-              <Box className="flex items-start gap-4">
-                <Box className="w-12 h-12 bg-[#E0F2E9] rounded-full flex items-center justify-center text-[#02A652]">
-                  <span className="text-xl">📞</span>
-                </Box>
-                <Box>
-                  <Heading text="Phone" level="h4" className="font-bold text-[#101828] text-lg" />
-                  <Paragraph text="(604) 807-6419" className="text-[#02A652] font-extrabold text-sm mt-1" />
-                </Box>
+              <Box>
+                <Heading text="Our Location" level="h4" className="font-bold text-[#101828] text-lg mb-4" />
+                <div className="w-full h-64 rounded-xl overflow-hidden border border-gray-100">
+                  <iframe 
+                    title="Lahore Map"
+                    width="100%" 
+                    height="100%" 
+                    frameBorder="0" 
+                    scrolling="no" 
+                    marginHeight={0} 
+                    marginWidth={0} 
+                    src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Lahore, Pakistan&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                  ></iframe>
+                </div>
               </Box>
             </Box>
           </Box>

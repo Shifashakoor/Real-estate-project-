@@ -1,6 +1,7 @@
 import Container from '../../components/layout/Container';
 import Heading from '../../components/ui/heading';
 import Paragraph from '../../components/ui/paragraph';
+import { Link } from 'react-router-dom';
 
 const SellCTASection = () => {
   return (
@@ -15,13 +16,22 @@ const SellCTASection = () => {
             />
             <Paragraph 
               text="Tell us about your property and let us handle the rest. We will find the perfect buyer for your home." 
-              className="text-slate-400 text-xs mt-1.5 leading-relaxed" 
+              className="text-slate-400 text-sm mt-2 leading-relaxed" 
             />
           </div>
-          <div className="w-full md:w-auto">
-            <button className="bg-[#7065F0] text-white text-xs font-semibold px-6 py-3.5 rounded-xl hover:bg-[#5b51d8] transition-all w-full md:w-auto whitespace-nowrap shadow-sm">
-              List Your Property
-            </button>
+
+          <div className="flex flex-col items-center">
+            {/* Main Action Button */}
+            <Link to="/contact">
+              <button className="bg-[#7065F0] text-white text-sm font-semibold px-8 py-3.5 rounded-xl hover:bg-[#5b51d8] transition-all shadow-sm whitespace-nowrap">
+                Start Selling Today
+              </button>
+            </Link>
+
+            {/* Terms Link (Chota sa niche) */}
+            <Link to="/terms" className="text-slate-500 text-[10px] mt-3 hover:underline">
+              Read our Terms & Conditions
+            </Link>
           </div>
         </div>
       </Container>

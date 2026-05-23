@@ -2,8 +2,11 @@ import BuyHeroSection from '../../sections/buySection/heroSection';
 import PropertyGridSection from '../../sections/buySection/propertySection';
 import TestimonialsSection from '../../sections/buySection/testimationSection';
 import BuyCTASection from '../../sections/buySection/ctaSection';
-
+import { useEffect } from 'react';
 const BuyPage = () => {
+  useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   return (
     <div className="w-full min-h-screen bg-white">
       <BuyHeroSection />

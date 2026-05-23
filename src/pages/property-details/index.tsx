@@ -1,56 +1,94 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { Bed, Bath, Square, ArrowLeft, PhoneCall } from 'lucide-react';
-import { propertiesData } from '../../sections/homeSection/propertyListingSection'; 
+import { propertiesData } from '../../sections/homeSection/propertyListingSection';
 import Container from '../../components/layout/Container';
 import Heading from '../../components/ui/heading';
 import Paragraph from '../../components/ui/paragraph';
-import Image from '../../components/ui/img'; 
+import Image from '../../components/ui/img';
 import { useEffect } from 'react';
+
+type LocationState = {
+  from?: 'home' | 'buy' | 'sell';
+};
 
 const PropertyDetails = () => {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
+  const state = location.state as LocationState | null;
+
   const property = propertiesData.find((p) => p.id === id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const from = state?.from || 'home';
+
+  const backPath =
+    from === 'sell'
+      ? '/sell'
+      : from === 'buy'
+      ? '/buy'
+      : '/';
+
+  const label =
+    from === 'sell'
+      ? 'Back to Sell'
+      : from === 'buy'
+      ? 'Back to Buy'
+      : 'Back to Home';
+
   if (!property) {
     return (
       <Container className="py-20 text-center">
         <Heading
-          text="Property Not Found!" 
-          level="h2" 
-          className="text-2xl font-bold text-slate-800" />
-        <Link to="/" className="text-[#7065F0] mt-4 inline-block hover:underline">Go back home</Link>
+          text="Property Not Found!"
+          level="h2"
+          className="text-2xl font-bold text-slate-800"
+        />
+
+        <Link
+          to={backPath}
+          className="text-[#7065F0] mt-4 inline-block hover:underline"
+        >
+          {label}
+        </Link>
       </Container>
     );
   }
 
   return (
     <Container className="bg-[#F7F7FD] min-h-screen py-10 font-['Plus_Jakarta_Sans',sans-serif]">
-      
       {/* Back Button */}
       <div className="max-w-3xl mx-auto px-2">
-        <Link to="/" className="flex items-center gap-2 text-slate-600 hover:text-[#7065F0] mb-5 transition-colors w-fit">
+        <Link
+          to={backPath}
+          className="flex items-center gap-2 text-slate-600 hover:text-[#7065F0] mb-5 transition-colors w-fit"
+        >
           <ArrowLeft size={18} />
-          <Paragraph text="Back to Listings" className="text-sm font-semibold !text-inherit m-0" />
+          <Paragraph
+            text={label}
+            className="text-sm font-semibold !text-inherit m-0"
+          />
         </Link>
       </div>
 
-      {/* Main Card (Size reduced to max-w-3xl and padding slightly adjusted) */}
+      {/* Main Card */}
       <div className="max-w-3xl mx-auto bg-white rounded-2xl overflow-hidden shadow-lg border border-slate-100 p-5 md:p-6">
-        
-        {/* Property Image (Height reduced to h-80 for compact look) */}
+        {/* Property Image */}
         <div className="relative h-80 w-full rounded-xl overflow-hidden mb-5 shadow-sm">
-          <Image 
-            src={property.image} 
-            alt={property.name} 
-            className="object-cover" 
+          <Image
+            src={property.image}
+            alt={property.name}
+            className="object-cover"
           />
+
           {property.isPopular && (
             <div className="absolute top-4 left-4 bg-[#7065F0] text-white rounded-lg shadow px-3 py-1.5 z-10">
-              <Paragraph text="✨ POPULAR" className="text-xs font-bold text-white m-0" />
+              <Paragraph
+                text="✨ POPULAR"
+                className="text-xs font-bold text-white m-0"
+              />
             </div>
           )}
         </div>
@@ -58,70 +96,97 @@ const PropertyDetails = () => {
         {/* Title and Price Section */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5 border-b border-slate-100 pb-5">
           <div>
-            <Heading 
-              text={property.name} 
+            <Heading
+              text={property.name}
               level="h1"
-              className="text-2xl font-bold text-[#000929] tracking-tight" 
+              className="text-2xl font-bold text-[#000929] tracking-tight"
             />
-            <Paragraph text={property.address} className="text-slate-500 text-xs mt-0.5" />
+
+            <Paragraph
+              text={property.address || property.location || ''}
+              className="text-slate-500 text-sm"
+            />
           </div>
-          
+
           <div className="text-left sm:text-right flex items-baseline gap-1">
-            <Paragraph text={`$${property.price}`} className="text-2xl font-extrabold text-[#7065F0] m-0" />
-            <Paragraph text=" /month" className="text-slate-400 text-xs font-medium m-0" />
+            <Paragraph
+              text={`$${property.price}`}
+              className="text-2xl font-extrabold text-[#7065F0] m-0"
+            />
+
+            <Paragraph
+              text=" /month"
+              className="text-slate-400 text-xs font-medium m-0"
+            />
           </div>
         </div>
 
-        {/* Features Grid & Contact Us Button Container */}
+        {/* Features Grid */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#F8F9FA] p-3 rounded-xl">
-          
-          {/* Left: Icons/Specs Grid */}
           <div className="grid grid-cols-3 gap-2 text-[#4D5461] w-full md:max-w-md">
             <div className="flex flex-col items-center gap-0.5 py-1.5 bg-white rounded-lg shadow-sm border border-slate-100/50">
               <Bed size={18} className="text-[#7065F0]" />
-              <Paragraph text="Bedrooms" className="text-[10px] text-slate-400 m-0 font-medium" />
-              <Paragraph text={`${property.beds} Beds`} className="text-xs font-bold text-slate-800 m-0" />
+              <Paragraph
+                text="Bedrooms"
+                className="text-[10px] text-slate-400 m-0 font-medium"
+              />
+              <Paragraph
+                text={`${property.beds} Beds`}
+                className="text-xs font-bold text-slate-800 m-0"
+              />
             </div>
-          
+
             <div className="flex flex-col items-center gap-0.5 py-1.5 bg-white rounded-lg shadow-sm border border-slate-100/50">
               <Bath size={18} className="text-[#7065F0]" />
-              <Paragraph text="Bathrooms" className="text-[10px] text-slate-400 m-0 font-medium" />
-              <Paragraph text={`${property.bathrooms} Baths`} className="text-xs font-bold text-slate-800 m-0" />
+              <Paragraph
+                text="Bathrooms"
+                className="text-[10px] text-slate-400 m-0 font-medium"
+              />
+              <Paragraph
+                text={`${property.bathrooms} Baths`}
+                className="text-xs font-bold text-slate-800 m-0"
+              />
             </div>
 
             <div className="flex flex-col items-center gap-0.5 py-1.5 bg-white rounded-lg shadow-sm border border-slate-100/50">
               <Square size={16} className="text-[#7065F0]" />
-              <Paragraph text="Total Area" className="text-[10px] text-slate-400 m-0 font-medium" />
-              <Paragraph text={property.area} className="text-xs font-bold text-slate-800 m-0" />
+              <Paragraph
+                text="Total Area"
+                className="text-[10px] text-slate-400 m-0 font-medium"
+              />
+              <Paragraph
+                text={property.area}
+                className="text-xs font-bold text-slate-800 m-0"
+              />
             </div>
           </div>
 
-          {/* Right Side: Contact Us Action Button */}
           <div className="w-full md:w-auto">
-            <Link 
-              to="/contact" 
-              className="flex items-center justify-center gap-2 bg-[#7065F0] text-xs font-semibold px-5 py-3 rounded-lg hover:bg-[#5b51d8] transition-all shadow-sm hover:shadow w-full md:w-auto whitespace-nowrap text-white"
+            <Link
+              to="/contact"
+              className="flex items-center justify-center gap-2 bg-[#7065F0] text-xs font-semibold px-5 py-3 rounded-lg hover:bg-[#5b51d8] transition-all text-white w-full"
             >
               <PhoneCall size={14} />
               Contact Us
             </Link>
           </div>
-
         </div>
 
-        {/* Description Section */}
+        {/* Description */}
         <div className="mt-6">
-          <Heading 
+          <Heading
             text="Description"
             level="h3"
-            className="text-base font-bold text-[#000929] mb-1.5" 
+            className="text-base font-bold text-[#000929] mb-1.5"
           />
-          <Paragraph 
-            text={`This beautiful ${property.name} is located at ${property.address}. It offers a premium living experience with ${property.beds} spacious bedrooms, ${property.bathrooms} modern bathrooms, and a total area of ${property.area}. Perfect for anyone looking for comfort and luxury.`} 
-            className="text-slate-500 text-xs leading-relaxed" 
+
+          <Paragraph
+            text={`This beautiful ${property.name} is located at ${
+              property.address || property.location
+            }.`}
+            className="text-slate-500 text-xs leading-relaxed"
           />
         </div>
-
       </div>
     </Container>
   );
