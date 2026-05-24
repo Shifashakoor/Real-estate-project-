@@ -1,13 +1,18 @@
 import { Navigate } from "react-router-dom";
+import type { ReactNode } from "react";
 
-const PublicRoute = ({ children }: any) => {
+type PublicRouteProps = {
+  children: ReactNode;
+};
+
+const PublicRoute = ({ children }: PublicRouteProps) => {
   const token = localStorage.getItem("authToken");
 
   if (token) {
     return <Navigate to="/" replace />;
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export default PublicRoute;
